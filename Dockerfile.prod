@@ -1,0 +1,7 @@
+FROM python:3.8-slim as builder
+WORKDIR /app
+COPY . .
+ENV FLASK_ENV=production
+EXPOSE 5000
+RUN ["python", "setup.py", "install"]
+CMD ["python", "-m", "flask_docker_course"]
