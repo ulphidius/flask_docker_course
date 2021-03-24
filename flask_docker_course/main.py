@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, abort
 from werkzeug.middleware.proxy_fix import ProxyFix
 from .user import User
+from os import getenv
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
@@ -27,3 +28,6 @@ def get_user_by_id(user_id):
         abort(404)
     
     return jsonify(user_to_return[0].as_dict())
+
+def main():
+    app.run(host=getenv('FLASK_IP'), port=getenv('FLASK_PORT'))
