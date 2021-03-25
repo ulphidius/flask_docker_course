@@ -66,3 +66,23 @@ docker stop docker_course_app
 docker stop docker_course_app_prod
 docker stop postgresql
 docker system prune
+
+# V2.0.0 compose
+
+# Create .env for docker-compose env var
+echo "FLASK_IP=0.0.0.0" > .env
+echo "FLASK_PORT=5000" >> .env
+echo "DB_NAME=course" >> .env
+echo "DB_HOST=flask_postgres" >> .env
+echo "DB_USER=flask" >> .env
+echo "DB_PASSWORD=flask" >> .env
+echo "POSTGRES_USER=flask" >> .env
+echo "POSTGRES_PASSWORD=flask" >> .env
+echo "POSTGRES_DB=course" >> .env
+
+# Start docker-compose
+docker-compose --env-file .env up --detach
+curl http://127.0.0.1:5000/user
+
+# Clean up
+docker-compose down
